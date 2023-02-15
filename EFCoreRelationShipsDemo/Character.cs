@@ -16,5 +16,6 @@ namespace EFCoreRelationShipsDemo
 
         public Weapon Weapon { get; set; }
 
+        public List<Skill> Skills { get; set;}
     }
 }
