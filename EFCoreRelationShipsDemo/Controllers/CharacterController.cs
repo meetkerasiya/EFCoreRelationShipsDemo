@@ -45,6 +45,26 @@ namespace EFCoreRelationShipsDemo.Controllers
             return await Get(newCharacter.UserId);
            
         }
+        
+        [HttpPost("weapon")]
+        public async Task<ActionResult<Character>> AddWeapon(AddWeaponDto request)
+        {
+            var character = await _context.Characters.FindAsync(request.CharacterId);
+            if (character == null)
+            {
+                return NotFound();
+            }
+            var newWeapon = new Weapon
+            {
+                Name = request.Name,
+                Damage = request.Damage,
+                Character = character
+            };
+            _ = _context.Weapons.Add(newWeapon);
+            await _context.SaveChangesAsync();
+            return character;
+           
+        }
 
 
     }
